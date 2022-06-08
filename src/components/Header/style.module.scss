@@ -1,0 +1,16 @@
+.header {
+    height: 6.25rem;
+    background-color: #202024;
+    display: grid;
+    place-items: center;
+
+    div {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    img {
+        height: 2rem;
+    }
+}
