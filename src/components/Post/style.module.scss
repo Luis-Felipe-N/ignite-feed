@@ -1,0 +1,53 @@
+.post {
+    background-color: var(--gray-800);
+    padding: 40px;
+    border-radius: 8px;
+
+    header {
+        display: flex;
+        gap: 1rem;
+
+        img {
+            width: 3.125rem;
+            border-radius: 8px;
+            box-shadow: 
+                0 0 0 3px var(--gray-800),
+                0 0 0 5px var(--green-500);
+        }
+        
+        p, time {
+            color: var(--gray-400);
+        }
+        >div {
+
+            flex: 1;
+
+        }
+    }
+
+    .content {
+        margin-top: 1.5rem;
+        line-height: 1.6;
+        color: var(--gray-300);
+
+        p {
+            margin-top: 1rem;
+        }
+        a {
+            font-weight: bold;
+            color: var(--green-500);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--green-300);
+        }
+        a + a {
+            margin-left: .5rem;
+        }
+    }
+}
+
+.post + .post {
+    margin-top: 2rem;
+}

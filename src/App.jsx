@@ -2,6 +2,7 @@ import { Header } from "./components/Header"
 import { Sidebar } from "./components/Sidebar"
 import './style/global.scss'
 import style from './style/app.module.scss'
+import { Post } from "./components/Post"
 
 function App() {
 
@@ -10,7 +11,11 @@ function App() {
       <Header />
       <div className={style.wrapper}>
         <Sidebar />
-        <main>sdasdasd</main>
+        <main>
+          <Post />
+          <Post />
+          <Post />
+        </main>
       </div>
     </>
   )
