@@ -1,0 +1,58 @@
+.comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 2rem;
+    
+    > img {
+        width: 3rem;
+        border-radius: 8px;
+    }
+
+    .commentBox {
+        width: 100%;
+    }
+    
+    .content {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 8px;
+        background-color: var(--gray-700);
+
+        header {
+            display: flex;
+            margin-bottom: 1rem;
+            span {
+                color: var(--gray-400);
+            }
+
+            div {
+                flex: 1;
+            }
+
+            div > span {
+                font-size: 0.75rem;
+                display: block;
+                flex: 1;
+            }
+            button {
+                cursor: pointer;
+                border: 0;
+                font-size: 0;
+                padding: .5rem .5rem;
+                border-radius: 8px;
+                background-color: transparent;
+                transition: .2s;
+            }
+
+            button:hover {
+                background-color: var(--gray-600);
+            }
+        }
+
+        p {
+            line-height: 1.6;
+        }
+    }
+}
