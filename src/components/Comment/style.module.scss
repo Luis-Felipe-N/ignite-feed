@@ -1,0 +1,91 @@
+.comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 2rem;
+    
+    > img {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .commentBox {
+        flex: 1;
+    }
+    
+    .content {
+        padding: 1rem;
+        border-radius: 8px;
+        background-color: var(--gray-700);
+
+        header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            
+            strong {
+                font-size: 0.875rem;
+            }
+
+            span {
+                color: var(--gray-400);
+            }
+
+            div {
+                flex: 1;
+            }
+
+            div > span {
+                font-size: 0.75rem;
+                line-height: 1.6;
+                display: block;
+            }
+
+            button {
+                cursor: pointer;
+                border: 0;
+                font-size: 0;
+                padding: .5rem .5rem;
+                border-radius: 8px;
+                background-color: transparent;
+                transition: .2s;
+                color: var(--gray-400);
+            }
+
+            button:hover {
+                background-color: var(--gray-600);
+                color: var(--red-500);
+            }
+        }
+
+        p {
+            line-height: 1.6;
+        }
+    }
+    footer button {
+        margin-top: .5rem;
+        cursor: pointer;
+        font-size: .875rem;
+        border: 0;
+        padding: .5rem;
+        border-radius: 8px;
+        background-color: transparent;
+        transition: .2s;
+        display: flex;
+        align-items: center;
+        color: var(--gray-400);
+
+        svg {
+            margin-right: .5rem;
+        }
+
+        span::before {
+            content: '\2022';
+            padding: 0 0.25rem;
+        }
+        &:hover {
+            color: var(--green-500);
+        }
+    }
+}
