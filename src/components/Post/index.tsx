@@ -1,9 +1,26 @@
-import { useState } from 'react'
+import { FormEvent, FormEventHandler, InvalidEvent, useState } from 'react'
+import { IPost } from '../../types/Post';
+import { formartDistanceDate } from '../../utils/formatDate';
 import { Avatar } from '../Avatar'
 import { Comment } from '../Comment'
 import style from './style.module.scss'
 
-export function Post({author, content, published_at}) {
+interface IAvatar {
+    name: string;
+    role: string;
+    avatarUrl: string
+}
+
+interface IComment {
+    content: string;
+    published_at: Date;
+}
+
+interface IPostProps {
+    post: IPost
+}
+
+export function Post({post}: IPostProps) {
     const [ comment, setComment ]= useState('')
     const [comments, setComments] = useState([
         {
@@ -12,7 +29,7 @@ export function Post({author, content, published_at}) {
         }
     ])
 
-    function handleAddComment(event) {
+    function handleAddComment(event: FormEvent) {
         event.preventDefault()
         const tempComment = {
             content: comment,
@@ -22,13 +39,9 @@ export function Post({author, content, published_at}) {
         setComment('')
     }
 
-    function handleDeleteComment(commentToDelete) {
+    function handleDeleteComment(commentToDelete: IComment) {
         const commentsWithoutDeletedOne = comments.filter(comment => comment.published_at !== commentToDelete.published_at)
         setComments(commentsWithoutDeletedOne)
-    }
-
-    function handleSetInvalidMessage(event) {
-        console.log(event.target)
     }
 
     const isNewCommentEmpty = comment.length === 0
@@ -36,20 +49,21 @@ export function Post({author, content, published_at}) {
     return (
         <article className={style.post}>
             <header className={style.post__header}>
-                <Avatar avatar={'https://github.com/Luis-Felipe-N.png'} />
+                <Avatar avatar={'https://github.com/Luis-Felipe-N.png'} alt="Foto de perfil do Luis Felipe" />
                 <div>
                     <strong>Luis Felipe</strong>
                     <p>Dev Front-End</p>
                 </div>
-                <time title="data da publicação">Publicado há 1h</time>
+                <time title="data da publicação">Publicado {formartDistanceDate(post.published_at)}</time>
             </header>
             <div className={style.post__content}>
-                <p>Fala galeraa 👋</p>
-                <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-                <p><a href="#">👉 jane.design/doctorcare</a></p>
-                <p><a href="#">#novoprojeto</a>
-                <a href="">#nlw</a>
-                <a href="">#rocketseat</a></p>
+                {post.content.map(line => {
+                    if (line.type === "link") {
+                        return (<p><a href={line.content} target="_blank" rel="noopener noreferrer">{line.content}</a></p>)
+                    } else {
+                        return (<p>{line.content}</p>)
+                    }
+                })}
             </div>
             <form onSubmit={handleAddComment} className={style.post__commentForm}>
                 <strong>Deixe seu feedback</strong>
@@ -58,7 +72,6 @@ export function Post({author, content, published_at}) {
                     placeholder='Escreva um comentário...'
                     value={comment}
                     onChange={(event) => setComment(event.target.value)}
-                    onInvalid={handleSetInvalidMessage}
                     required
                 />
                 <footer>
@@ -71,7 +84,7 @@ export function Post({author, content, published_at}) {
                 { comments ? (
                     comments.map(comment => (
                         <Comment
-                          key={comment.published_at}
+                          key={comment.content}
                           comment={comment}
                           onResquestDelete={handleDeleteComment}
                         />

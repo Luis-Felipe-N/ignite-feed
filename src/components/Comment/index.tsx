@@ -1,14 +1,20 @@
 import style from './style.module.scss'
 import { Trash, ThumbsUp } from 'phosphor-react'
 import { Avatar } from '../Avatar'
-import { formartDistanceDate } from '../../utils/formatDate'
 import { useState } from 'react'
+import { formartDistanceDate } from '../../utils/formatDate';
 
-// interface ICommentProps {
-//     content: string
-// }
+interface IComment {
+    content: string;
+    published_at: Date;
+}
 
-export function Comment({comment, onResquestDelete}) {
+interface ICommentProps {
+    comment: IComment;
+    onResquestDelete: (comment: IComment) => void
+}
+
+export function Comment({comment, onResquestDelete}: ICommentProps) {
     const [likeCount, setLikeCount] = useState(0)
 
     function handleAddLike() {
@@ -17,7 +23,7 @@ export function Comment({comment, onResquestDelete}) {
 
     return (
         <div className={style.comment}>
-            <Avatar hasBorder={false} avatar={'https://github.com/Luis-Felipe-N.png'} />
+            <Avatar hasBorder={false} avatar={'https://github.com/Luis-Felipe-N.png'} alt="Foto de perfil do Luis Felipe" />
             <div className={style.commentBox}>
                 <div className={style.content}>
                     <header>

@@ -10,14 +10,17 @@
   "dependencies": {
     "date-fns": "^2.29.1",
     "phosphor-react": "^1.4.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "sass": "^1.52.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.52.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^1.3.0",
-    "vite": "^2.9.9"
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@types/uuid": "^8.3.4",
+    "@vitejs/plugin-react": "^2.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0"
   }
 }
