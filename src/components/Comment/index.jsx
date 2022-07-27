@@ -12,7 +12,7 @@ export function Comment({comment, onResquestDelete}) {
     const [likeCount, setLikeCount] = useState(0)
 
     function handleAddLike() {
-        setLikeCount(likeCount => likeCount + 1 )
+        setLikeCount(oldLikeCount => oldLikeCount + 1 )
     }
 
     return (
