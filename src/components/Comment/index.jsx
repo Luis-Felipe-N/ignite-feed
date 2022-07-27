@@ -1,25 +1,47 @@
 import style from './style.module.scss'
-import trashIcon from '../../assets/trash.svg'
+import { Trash, ThumbsUp } from 'phosphor-react'
+import { Avatar } from '../Avatar'
+import { formartDistanceDate } from '../../utils/formatDate'
+import { useState } from 'react'
 
-export function Comment() {
+// interface ICommentProps {
+//     content: string
+// }
+
+export function Comment({comment, onResquestDelete}) {
+    const [likeCount, setLikeCount] = useState(0)
+
+    function handleAddLike() {
+        setLikeCount(likeCount => likeCount + 1 )
+    }
+
     return (
         <div className={style.comment}>
-            <img src="https://github.com/Luis-Felipe-N.png" alt="Foto de usuário do Luis Felipe" />
+            <Avatar hasBorder={false} avatar={'https://github.com/Luis-Felipe-N.png'} />
             <div className={style.commentBox}>
                 <div className={style.content}>
                     <header>
                         <div>
                             <strong>Luis Felipe <span>(você)</span></strong>
-                            <span>Cerca de 2h</span>
+                            <span>{formartDistanceDate(comment.published_at)}</span>
                         </div>
-                        <button>
-                            <img src={trashIcon} alt="Icone de uma lixeira" title='Apagar comentário' aria-label='Apagar comentário' />
+                        <button
+                          title='Apagar comentário'
+                          aria-label='Apagar comentário'
+                          onClick={() => onResquestDelete(comment)}>
+                            <Trash size={20} />
                         </button>
                     </header>
-                    <p>Muito bom Devon, parabéns!! 👏👏</p>
+                    <p>{comment.content}</p>
                 </div>
                 <footer>
-                    Aplaudir
+                    <button
+                        onClick={handleAddLike}
+                    >
+                        <ThumbsUp size={20} />
+                        Aplaudir
+                        <span>{likeCount}</span>
+                    </button>
                 </footer>
             </div>
         </div>

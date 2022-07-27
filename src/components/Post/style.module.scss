@@ -14,16 +14,14 @@
 
         img {
             width: 3.125rem;
-            border-radius: 8px;
-            box-shadow: 
-                0 0 0 3px var(--gray-800),
-                0 0 0 5px var(--green-500);
+            height: 3.125rem;
         }
         
         p, time {
             color: var(--gray-400);
         }
-        >div {
+
+        > div {
 
             flex: 1;
 
@@ -94,9 +92,13 @@
             border: 0;
             cursor: pointer;
             transition: background-color .2s;
+
+            &:disabled {
+                cursor: not-allowed;
+            }
         }
 
-        button:hover {
+        button:not(:disabled):hover {
             background-color: var(--green-300);
         }
     }

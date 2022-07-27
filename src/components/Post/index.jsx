@@ -1,11 +1,42 @@
+import { useState } from 'react'
+import { Avatar } from '../Avatar'
 import { Comment } from '../Comment'
 import style from './style.module.scss'
 
-export function Post() {
+export function Post({author, content, published_at}) {
+    const [ comment, setComment ]= useState('')
+    const [comments, setComments] = useState([
+        {
+            content: 'Muito legal',
+            published_at: new Date()
+        }
+    ])
+
+    function handleAddComment(event) {
+        event.preventDefault()
+        const tempComment = {
+            content: comment,
+            published_at: new Date()
+        }
+        setComments([...comments, tempComment])
+        setComment('')
+    }
+
+    function handleDeleteComment(commentToDelete) {
+        const commentsWithoutDeletedOne = comments.filter(comment => comment.published_at !== commentToDelete.published_at)
+        setComments(commentsWithoutDeletedOne)
+    }
+
+    function handleSetInvalidMessage(event) {
+        console.log(event.target)
+    }
+
+    const isNewCommentEmpty = comment.length === 0
+
     return (
         <article className={style.post}>
             <header className={style.post__header}>
-                <img src="https://github.com/Luis-Felipe-N.png" alt="Foto de perfil do Luis Felipe" />
+                <Avatar avatar={'https://github.com/Luis-Felipe-N.png'} />
                 <div>
                     <strong>Luis Felipe</strong>
                     <p>Dev Front-End</p>
@@ -20,20 +51,35 @@ export function Post() {
                 <a href="">#nlw</a>
                 <a href="">#rocketseat</a></p>
             </div>
-            <form className={style.post__commentForm}>
+            <form onSubmit={handleAddComment} className={style.post__commentForm}>
                 <strong>Deixe seu feedback</strong>
                 <textarea 
+                    name="comment"
                     placeholder='Escreva um comentário...'
+                    value={comment}
+                    onChange={(event) => setComment(event.target.value)}
+                    onInvalid={handleSetInvalidMessage}
+                    required
                 />
                 <footer>
-                <button>Enviar</button>
+                    <button
+                        disabled={isNewCommentEmpty}
+                    >Publicar</button>
                 </footer>
             </form>
             <div>
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
+                { comments ? (
+                    comments.map(comment => (
+                        <Comment
+                          key={comment.published_at}
+                          comment={comment}
+                          onResquestDelete={handleDeleteComment}
+                        />
+                    ))
+                ): (
+                    <h1>Sem comentários</h1>
+                )}
+                
             </div>
         </article>
     )
