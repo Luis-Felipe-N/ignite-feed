@@ -36,7 +36,6 @@ $ yarn dev ou npm run dev
 ```
 Se tudo dé certo, acesse http://localhost:3000/ ou http://localhost:5173/
 
-## Autor
 ---
 
 Feito com ❤️ por Luis Felipe
